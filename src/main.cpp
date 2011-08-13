@@ -1,5 +1,8 @@
 #include <iostream.h>
 
+#include <Context.hpp>
+
+
 int main(void)
 {
 	
@@ -24,5 +27,7 @@ int main(void)
 	<< "   .                                                                 *         " << std::endl
 	<< "                                      .                                       " << std::endl
 	<< "//// kocmoc //////////////////////////////////////////////////////////////////" << std::endl;
+	
+	kocmoc::core::init();
 
 }
