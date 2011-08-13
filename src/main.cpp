@@ -28,6 +28,6 @@ int main(void)
 	<< "                                      .                                       " << std::endl
 	<< "//// kocmoc //////////////////////////////////////////////////////////////////" << std::endl;
 	
-	kocmoc::core::init();
+	kocmoc::core::createContext();
 
 }

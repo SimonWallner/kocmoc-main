@@ -5,7 +5,7 @@ include_directories(
 )
 
 link_directories(
-    ${PROJECT_SOURCE_DIR}/external/kocmoc-core/lib
+#    ${PROJECT_SOURCE_DIR}/external/kocmoc-core/lib
 )
 
 # collect the files
@@ -26,7 +26,7 @@ endif (WIN32)
 add_executable(kocmoc ${SOURCE_FILES})
 
 set (TARGET_LINK_LIBRARIES kocmoc
-#    kocmoc-core
+    kocmoc-core
 )
 
 target_link_libraries(${TARGET_LINK_LIBRARIES})
