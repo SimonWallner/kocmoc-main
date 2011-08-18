@@ -3,7 +3,7 @@
 #include <Context.hpp>
 
 
-int main(void)
+int main(int argc, char *argv[])
 {
 	
 	std::cout	<< "//////////////////////////////////////////////////////////////////////////////" << std::endl
@@ -27,7 +27,5 @@ int main(void)
 	<< "   .                                                                 *         " << std::endl
 	<< "                                      .                                       " << std::endl
 	<< "//// kocmoc //////////////////////////////////////////////////////////////////" << std::endl;
-	
-	kocmoc::core::createContext();
 
 }
