@@ -9,14 +9,14 @@ link_directories(
 )
 
 # collect the files
-file(GLOB HEADER_FILES_MSVC *.hpp)
-file(GLOB SOURCE_FILES *.cpp)
+file(GLOB_RECURSE HEADER_FILES *.hpp)
+file(GLOB_RECURSE SOURCE_FILES *.cpp)
 
 
 
 if (WIN32)
 	# join the header files so that the VS can display them
-	SET(SOURCE_FILES ${SOURCE_FILES} ${HEADER_FILES_MSVC})
+	SET(SOURCE_FILES ${SOURCE_FILES} ${HEADER_FILES})
 
 	# MSVC resources stuff
 #	file(GLOB RESOURCES_SHADERS_MSVC ../media/shaders/*)
