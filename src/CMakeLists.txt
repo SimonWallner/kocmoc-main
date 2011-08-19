@@ -23,7 +23,7 @@ if (WIN32)
 #	source_group(foo FILES ../media/shaders/base.frag)
 endif (WIN32)
 
-add_executable(kocmoc ${SOURCE_FILES})
+add_executable(kocmoc MACOSX_BUNDLE ${SOURCE_FILES})
 
 set (TARGET_LINK_LIBRARIES kocmoc
     kocmoc-core
