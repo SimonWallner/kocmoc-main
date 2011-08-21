@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include <kocmoc-core/Context.hpp>
+#include <kocmoc-core/renderer/Context.hpp>
 
 
 int main(int argc, char *argv[])
