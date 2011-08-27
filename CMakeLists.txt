@@ -32,6 +32,11 @@ add_custom_target(doc-kocmoc-main
 endif(DOXYGEN_FOUND)
 
 
-
+# -- ad subdirs --------------------------------------------------------------
 add_subdirectory(external/kocmoc-core)
 add_subdirectory(src)
+
+# -- copy and configure ------------------------------------------------------
+message(STATUS "configuring files...")
+set(MEDIA_PATH ${PROJECT_SOURCE_DIR}/media)
+configure_file(media/kocmoc-config.xml.in ${EXECUTABLE_OUTPUT_PATH}/kocmoc-config.xml)

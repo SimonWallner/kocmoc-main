@@ -13,16 +13,6 @@ file(GLOB_RECURSE HEADER_FILES *.hpp)
 file(GLOB_RECURSE SOURCE_FILES *.cpp)
 
 
-
-if (WIN32)
-	# join the header files so that the VS can display them
-	SET(SOURCE_FILES ${SOURCE_FILES} ${HEADER_FILES})
-
-	# MSVC resources stuff
-#	file(GLOB RESOURCES_SHADERS_MSVC ../media/shaders/*)
-#	source_group(foo FILES ../media/shaders/base.frag)
-endif (WIN32)
-
 add_executable(kocmoc MACOSX_BUNDLE ${SOURCE_FILES})
 
 set (TARGET_LINK_LIBRARIES kocmoc
