@@ -1,5 +1,10 @@
 <?xml version="1.0" ?>
 <properties>
-	<value name="media-path" type="string">${KOCMOC_MEDIA_PATH}</value>
-	<value type="test-float" type="float">42.123456789</value>
+	<string name="media-path" value="${KOCMOC_MEDIA_PATH}" />
+	<string name="string-test" value="foobar" />
+	<float name="test-float" value="42.123456789" />
+	<float name="float-rail" value="foo" />
+	<float name="float-scientific" value="1.23456e-3" />
+	<bool name="test-bool" value="1" />
+	<bool name="test-bool-false" value="0" />
 </properties>

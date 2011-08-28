@@ -38,5 +38,5 @@ add_subdirectory(src)
 
 # -- copy and configure ------------------------------------------------------
 message(STATUS "configuring files...")
-set(MEDIA_PATH ${PROJECT_SOURCE_DIR}/media)
+set(KOCMOC_MEDIA_PATH ${PROJECT_SOURCE_DIR}/media)
 configure_file(media/kocmoc-config.xml.in ${EXECUTABLE_OUTPUT_PATH}/kocmoc-config.xml)
