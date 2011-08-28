@@ -1,5 +1,13 @@
 # cmake list for src/
 
+# -- git revision number magic -----------------------------------------------
+# configure header file and append it to the other header files
+configure_file("${PROJECT_SOURCE_DIR}/src/version.hpp.in" "${PROJECT_BINARY_DIR}/src/version.hpp")
+list(APPEND INCLUDE_C_HEADER_FILES "${PROJECT_BINARY_DIR}/include/kocmoc-core/version.hpp")
+
+
+
+
 # -- find stuff --------------------------------------------------------------
 find_package(Boost COMPONENTS program_options)
 if(NOT Boost_FOUND)
@@ -8,6 +16,8 @@ endif()
 
 include_directories(
     ${PROJECT_SOURCE_DIR}/external/kocmoc-core/include
+    ${PROJECT_BINARY_DIR}/external/kocmoc-core/include
+	${PROJECT_BINARY_DIR}/src/
 	${Boost_INCLUDE_DIR}
 )
 

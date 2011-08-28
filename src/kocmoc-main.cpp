@@ -5,16 +5,23 @@
 
 #include <kocmoc-core/util/Properties.hpp>
 #include <kocmoc-core/util/util.hpp>
+#include <kocmoc-core/version.hpp>
 
-using namespace kocmoc::core::util;
+
+#include "Kocmoc.hpp"
+#include "version.hpp"
+
+
+using namespace kocmoc;
 namespace po = boost::program_options;
 
 int main(int argc, char *argv[])
 {	
-	// parse command line args
-	
-	std::string configFile;
 
+	// command line arguments, defaults
+	std::string configFile = "kocmoc-config.xml";
+
+	// parse command line args
 	try
 	{
 		po::options_description options("kocmoc program options");
@@ -27,45 +34,28 @@ int main(int argc, char *argv[])
 		po::store(po::parse_command_line(argc, argv, options), vars);
 		po::notify(vars);
 
-		
-		if (vars.count("help")) {
+		if (vars.count("help"))
+		{
 			std::cout << options << "\n";
 			return 1;
 		}
-
-
+		
+		if (vars.count("version"))
 		{
-			std::cout	<< "//////////////////////////////////////////////////////////////////////////////" << std::endl
-			<< "   *           .                          .                          .        " << std::endl
-			<< "                             .                   .                         " << std::endl
-			<< "           .                                                    *           " << std::endl  
-			<< ".                                        .                               " << std::endl 
-			<< "                    .              .                  .                 .        " << std::endl
-			<< "                                                                      " << std::endl
-			<< "                                                                             " << std::endl
-			<< "         .           *                      .                 .                " << std::endl
-			<< "                               .           *                                   " << std::endl
-			<< "                                                                         .    " << std::endl
-			<< "                      .             .                         .                 " << std::endl
-			<< "*          .                                                                   " << std::endl
-			<< "                                                 .         0                   " << std::endl
-			<< "                             .                            /|\\                    " << std::endl
-			<< "          .                                                           .        " << std::endl
-			<< "                                                .                             " << std::endl
-			<< "                     *               .                    .                     " << std::endl
-			<< "   .                                                                 *         " << std::endl
-			<< "                                      .                                       " << std::endl
-			<< "//// kocmoc //////////////////////////////////////////////////////////////////" << std::endl;
-		} // kocmoc ASCII intro
+			std::cout << "kocmoc version: " << std::endl;
+			std::cout << "\t" << core::version::getVersionString() << std::endl;
+			std::cout << "\t" << version::getVersionString() << std::endl;
+			
+			return 1;
+		}
 		
-		
-		Properties props;
-		if (vars.count("config-file"))
-			parseConfigXMLFileIntoProperties(configFile, &props);
-		else
-			parseConfigXMLFileIntoProperties("kocmoc-config.xml", &props);
-		
-		props.dumpCache();
+		// bootstrap kocmoc...
+		{
+			core::util::Properties props;
+			props.add(core::types::symbolize("config-file"), configFile);
+			
+			Kocmoc kocmoc(&props);
+		}
 		
 	}
     catch(std::exception& e)

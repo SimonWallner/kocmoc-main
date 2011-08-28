@@ -12,9 +12,7 @@ set(APP_NAME kocmoc)
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 include(GetGitRevisionDescription)
 get_git_head_revision(GIT_REFSPEC KOCMOC_MAIN_GIT_SHA1)
-
 message(STATUS "KOCMOC-MAIN revision hash is: ${KOCMOC_MAIN_GIT_SHA1}")
-
 
 
 # -- doxygen -----------------------------------------------------------------
@@ -32,7 +30,7 @@ add_custom_target(doc-kocmoc-main
 endif(DOXYGEN_FOUND)
 
 
-# -- ad subdirs --------------------------------------------------------------
+# -- add subdirs -------------------------------------------------------------
 add_subdirectory(external/kocmoc-core)
 add_subdirectory(src)
 
