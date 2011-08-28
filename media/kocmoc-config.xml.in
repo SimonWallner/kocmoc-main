@@ -1,3 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "properties.dtd">
+
 <!--
  This is the main config file for kocmoc:
  All config values must reside inside the <properties> tag. The following
@@ -9,10 +12,9 @@
  the names should use hyphens not cammelCase.
 -->
 
-<?xml version="1.0" ?>
+
 <properties>
-	<bool name="fullscreen" value="0" />
-	<flaot name="width" value="720" />
+	<float name="width" value="720" />
 	<float name="height" value="432" />
 	
 	<string name="media-path" value="${KOCMOC_MEDIA_PATH}" />

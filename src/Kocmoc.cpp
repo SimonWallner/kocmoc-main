@@ -34,6 +34,7 @@ Kocmoc::Kocmoc(Properties* props)
 {
 	string configFile = props->getString(symbolize("config-file"));
 	core::util::parseConfigXMLFileIntoProperties(configFile, props);
+	props->dumpCache();
 	
 	
 	Context context;

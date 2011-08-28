@@ -38,3 +38,14 @@ add_subdirectory(src)
 message(STATUS "configuring files...")
 set(KOCMOC_MEDIA_PATH ${PROJECT_SOURCE_DIR}/media)
 configure_file(media/kocmoc-config.xml.in ${EXECUTABLE_OUTPUT_PATH}/kocmoc-config.xml)
+configure_file(media/properties.dtd ${EXECUTABLE_OUTPUT_PATH}/properties.dtd COPYONLY)
+
+# -- check xml files ---------------------------------------------------------
+add_custom_command(
+	OUTPUT kocmoc-config.xml
+	COMMAND echo xmllint ${EXECUTABLE_OUTPUT_PATH}/kocmoc-config.xml --valid
+	)
+add_custom_target(xml-validate
+	DEPENDS kocmoc-config.xml
+	)
+add_dependencies(kocmoc xml-validate)
