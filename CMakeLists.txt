@@ -29,10 +29,24 @@ add_custom_target(doc-kocmoc-main
 	)
 endif(DOXYGEN_FOUND)
 
+# -- check xml files ---------------------------------------------------------
+set (XML_FILES 
+	media/kocmoc-config.xml.in
+	)
 
-# -- add subdirs -------------------------------------------------------------
-add_subdirectory(external/kocmoc-core)
-add_subdirectory(src)
+foreach(f ${XML_FILES})
+	execute_process(
+		COMMAND xmllint ${f} --valid
+		WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
+		RESULT_VARIABLE XML_VALIDATION_RESULT
+		OUTPUT_QUIET
+		)
+
+	if (XML_VALIDATION_RESULT) # 1 => error, 0 => OK
+		message(WARNING "faild to validate xml file: ${f}")
+	endif()
+endforeach()
+
 
 # -- copy and configure ------------------------------------------------------
 message(STATUS "configuring files...")
@@ -40,12 +54,9 @@ set(KOCMOC_MEDIA_PATH ${PROJECT_SOURCE_DIR}/media)
 configure_file(media/kocmoc-config.xml.in ${EXECUTABLE_OUTPUT_PATH}/kocmoc-config.xml)
 configure_file(media/properties.dtd ${EXECUTABLE_OUTPUT_PATH}/properties.dtd COPYONLY)
 
-# -- check xml files ---------------------------------------------------------
-add_custom_command(
-	OUTPUT kocmoc-config.xml
-	COMMAND echo xmllint ${EXECUTABLE_OUTPUT_PATH}/kocmoc-config.xml --valid
-	)
-add_custom_target(xml-validate
-	DEPENDS kocmoc-config.xml
-	)
-add_dependencies(kocmoc xml-validate)
+
+# -- add subdirs -------------------------------------------------------------
+add_subdirectory(external/kocmoc-core)
+add_subdirectory(src)
+
+
