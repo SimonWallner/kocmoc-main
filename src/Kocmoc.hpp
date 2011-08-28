@@ -9,6 +9,8 @@
 #ifndef KOCMOC_KOCMOC_HPP
 #define KOCMOC_KOCMOC_HPP
 
+#include <kocmoc-core/types/Symbol.hpp>
+#include <kocmoc-core/input/ButtonEventListener.hpp>
 
 namespace kocmoc
 {
@@ -42,6 +44,24 @@ namespace kocmoc
 
 	private:
 		core::util::Properties* props;
+		bool running;
+		core::types::Symbol quit;
+		
+		class KeyWatcher : public core::input::ButtonEventListener
+		{
+		public:
+			KeyWatcher(Kocmoc* _p)
+			: p(_p)
+			{};
+			
+			void buttonEventCallback(core::types::Symbol name, core::input::ButtonEvent event)
+			{
+				if (name == p->quit && event.isPressed == true)
+					p->running = false;
+			}
+		private:
+			Kocmoc* p;
+		} kw;
 	};
 }
 

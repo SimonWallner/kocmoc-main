@@ -14,19 +14,42 @@
 #include <kocmoc-core/util/Properties.hpp>
 #include <kocmoc-core/util/util.hpp>
 #include <kocmoc-core/types/Symbol.hpp>
+#include <kocmoc-core/renderer/Context.hpp>
+#include <kocmoc-core/input/InputManager.hpp>
 
 using namespace kocmoc;
 using namespace kocmoc::core::types;
+using namespace kocmoc::core::input;
 
-using kocmoc::core::util::Properties;
 using std::string;
 
+using kocmoc::core::util::Properties;
+using kocmoc::core::renderer::Context;
+
+
 Kocmoc::Kocmoc(Properties* props)
+: running(true)
+, quit(symbolize("quit"))
+, kw(this)
 {
 	string configFile = props->getString(symbolize("config-file"));
 	core::util::parseConfigXMLFileIntoProperties(configFile, props);
 	
-	props->dumpCache();
+	
+	Context context;
+	context.getInfo();
+	
+	InputManager inputManager(context.getWindowHandle());
+	
+	inputManager.registerButtonEventListener(quit, &kw);
+	inputManager.bindButtonEventToKey(quit, 81);	// q
+	inputManager.bindButtonEventToKey(quit, 256);	// ESC (not working ???)
+	
+	while (running == true && context.isAlive())
+	{
+		inputManager.poll();
+		context.swapBuffers();
+	}
 }
 
 void Kocmoc::printIntro()

@@ -19,6 +19,7 @@ include_directories(
     ${PROJECT_BINARY_DIR}/external/kocmoc-core/include
 	${PROJECT_BINARY_DIR}/src/
 	${Boost_INCLUDE_DIR}
+	${PROJECT_SOURCE_DIR}/external/kocmoc-core/external/glfw/include
 )
 
 link_directories(
@@ -30,7 +31,7 @@ file(GLOB_RECURSE HEADER_FILES *.hpp)
 file(GLOB_RECURSE SOURCE_FILES *.cpp)
 
 
-add_executable(kocmoc ${SOURCE_FILES})
+add_executable(kocmoc ${SOURCE_FILES} ${HEADER_FILES})
 
 set (TARGET_LINK_LIBRARIES kocmoc
     kocmoc-core

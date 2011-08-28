@@ -45,6 +45,7 @@ int main(int argc, char *argv[])
 			std::cout << "kocmoc version: " << std::endl;
 			std::cout << "\t" << core::version::getVersionString() << std::endl;
 			std::cout << "\t" << version::getVersionString() << std::endl;
+			std::cout << "\tbuild date: " << __DATE__ << std::endl;
 			
 			return 1;
 		}
