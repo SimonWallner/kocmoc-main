@@ -20,6 +20,7 @@ include_directories(
 	${PROJECT_BINARY_DIR}/src/
 	${Boost_INCLUDE_DIR}
 	${PROJECT_SOURCE_DIR}/external/kocmoc-core/external/glfw/include
+	${PROJECT_SOURCE_DIR}/external/kocmoc-core/external/glm/include
 )
 
 link_directories(
