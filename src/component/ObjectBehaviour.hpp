@@ -20,6 +20,8 @@ namespace kocmoc
 		class ObjectBehaviour : public core::componentSystem::Component
 		{
 		public:
+			
+			ObjectBehaviour();
 
 			void onUpdate(void) {};
 

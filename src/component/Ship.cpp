@@ -8,13 +8,25 @@
 
 #include "Ship.hpp"
 
-#include "ObjectBehaviour.hpp"
-#include "ShipBehaviour.hpp"
-
 using namespace kocmoc::component;
 
 void Ship::init()
 {
-	addComponent(new ObjectBehaviour());
-	addComponent(new ShipBehaviour());
+	objectBehaviour = new ObjectBehaviour();
+	shipBehaviour = new ShipBehaviour();
+	renderable = new Renderable();
+	shipController = new ShipController();
+	
+	addComponent(objectBehaviour);
+	addComponent(shipBehaviour);
+	addComponent(renderable);
+	addComponent(shipController);
+	
+	registerUpdateReceiver(shipController);
+	registerRenderReceiver(renderable);
+	
+	shipController->init();
+	objectBehaviour->init();
+	shipBehaviour->init();
+	renderable->init();
 }

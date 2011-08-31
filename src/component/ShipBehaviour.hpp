@@ -13,6 +13,8 @@
 
 #include "ObjectBehaviour.hpp"
 
+#include <iostream>
+
 namespace kocmoc
 {
 	namespace component
@@ -24,12 +26,12 @@ namespace kocmoc
 			
 			void left(void)
 			{
-				objectBehaviour->position += glm::vec3(-1, 0, 0);
+				objectBehaviour->position.x += -1.0f;
 			}
 			
 			void right(void)
 			{
-				objectBehaviour->position += glm::vec3(1, 0, 0);
+				objectBehaviour->position.x += 1.0f;
 			}
 			
 			void init(void);

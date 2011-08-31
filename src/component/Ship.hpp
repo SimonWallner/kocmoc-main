@@ -11,6 +11,11 @@
 
 #include <kocmoc-core/componentSystem/Object.hpp>
 
+#include "ObjectBehaviour.hpp"
+#include "ShipBehaviour.hpp"
+#include "ShipController.hpp"
+#include "Renderable.hpp"
+
 namespace kocmoc
 {
 	namespace component
@@ -19,9 +24,17 @@ namespace kocmoc
 		{
 		public:
 			
+			explicit Ship(std::string name) : Object(name) {}
+			
 			void onMessage(void);
 			
 			void init(void);
+			
+		private:
+			ObjectBehaviour* objectBehaviour;
+			ShipBehaviour* shipBehaviour;
+			ShipController* shipController;
+			Renderable* renderable;
 		};
 	}
 }

@@ -10,6 +10,7 @@
 #define KOCMOC_COMPONENT_SHIP_CONTROLLER_HPP
 
 #include <kocmoc-core/componentSystem/Component.hpp>
+#include <kocmoc-core/types/types.h>
 
 namespace kocmoc
 {
@@ -20,6 +21,9 @@ namespace kocmoc
 		class ShipController : public core::componentSystem::Component
 		{
 		public:
+			
+			ShipController(void);
+			
 			void onUpdate(void);
 			
 			void init(void);

@@ -12,6 +12,9 @@
 
 using namespace kocmoc::component;
 
+ShipController::ShipController()
+{}
+
 void ShipController::init()
 {
 	shipBehaviour = parent->getComponent<ShipBehaviour>();
@@ -19,5 +22,5 @@ void ShipController::init()
 
 void ShipController::onUpdate()
 {
-	// fake getting input
+	shipBehaviour->left();
 }

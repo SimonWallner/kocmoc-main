@@ -21,6 +21,8 @@ using namespace kocmoc;
 using namespace kocmoc::core::types;
 using namespace kocmoc::core::input;
 
+using namespace kocmoc::component;
+
 using std::string;
 
 using kocmoc::core::util::Properties;
@@ -28,9 +30,9 @@ using kocmoc::core::renderer::Context;
 
 
 Kocmoc::Kocmoc(Properties* props)
-: running(true)
-, quit(symbolize("quit"))
-, kw(this)
+	: running(true)
+	, quit(symbolize("quit"))
+	, kw(this)
 {
 	string configFile = props->getString(symbolize("config-file"));
 	core::util::parseConfigXMLFileIntoProperties(configFile, props);
@@ -46,9 +48,15 @@ Kocmoc::Kocmoc(Properties* props)
 	inputManager.bindButtonEventToKey(quit, 81);	// q
 	inputManager.bindButtonEventToKey(quit, 256);	// ESC (not working ???)
 	
+	init();
+	
 	while (running == true && context.isAlive())
 	{
 		inputManager.poll();
+		
+		ship->update();
+		ship->render();
+		
 		context.swapBuffers();
 	}
 }
@@ -77,3 +85,10 @@ void Kocmoc::printIntro()
 	<< "                                      .                                       " << std::endl
 	<< "//// kocmoc //////////////////////////////////////////////////////////////////" << std::endl;
 }
+
+void Kocmoc::init()
+{
+	ship = new Ship("the player ship");
+	ship->init();
+}
+

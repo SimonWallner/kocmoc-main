@@ -7,3 +7,9 @@
 //
 
 #include "ObjectBehaviour.hpp"
+
+using namespace kocmoc::component;
+
+ObjectBehaviour::ObjectBehaviour()
+	: position(glm::vec3(0, 0, 0))
+{}

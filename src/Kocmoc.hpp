@@ -12,6 +12,8 @@
 #include <kocmoc-core/types/Symbol.hpp>
 #include <kocmoc-core/input/ButtonEventListener.hpp>
 
+#include "component/Ship.hpp"
+
 namespace kocmoc
 {
 	namespace core
@@ -47,6 +49,8 @@ namespace kocmoc
 		bool running;
 		core::types::Symbol quit;
 		
+		component::Ship* ship;
+		
 		class KeyWatcher : public core::input::ButtonEventListener
 		{
 		public:
@@ -62,6 +66,8 @@ namespace kocmoc
 		private:
 			Kocmoc* p;
 		} kw;
+		
+		void init(void);
 	};
 }
 
