@@ -21,7 +21,7 @@ namespace kocmoc
 		{
 		public:
 
-			void onUpdate(void);
+			void onUpdate(void) {};
 
 			glm::vec3 position;
 			

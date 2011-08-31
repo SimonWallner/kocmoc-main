@@ -17,6 +17,8 @@ namespace kocmoc
 	{
 		class Ship : public kocmoc::core::componentSystem::Object
 		{
+		public:
+			
 			void onMessage(void);
 			
 			void init(void);

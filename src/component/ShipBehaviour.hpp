@@ -20,6 +20,7 @@ namespace kocmoc
 		class ShipBehaviour : public core::componentSystem::Component
 		{
 		public:
+			ShipBehaviour(void) {};
 			
 			void left(void)
 			{
