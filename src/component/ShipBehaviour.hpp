@@ -37,7 +37,7 @@ namespace kocmoc
 			void init(void);
 			
 		private:
-			ObjectBehaviour* objectBehaviour;
+			core::component::ObjectBehaviour* objectBehaviour;
 		};
 	}
 }

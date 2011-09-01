@@ -9,6 +9,7 @@
 #include "ShipBehaviour.hpp"
 
 using namespace kocmoc::component;
+using kocmoc::core::component::ObjectBehaviour;
 
 void ShipBehaviour::init()
 {

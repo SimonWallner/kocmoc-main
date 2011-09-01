@@ -32,10 +32,10 @@ namespace kocmoc
 			void init(void);
 			
 		private:
-			ObjectBehaviour* objectBehaviour;
+			core::component::ObjectBehaviour* objectBehaviour;
 			ShipBehaviour* shipBehaviour;
 			ShipController* shipController;
-			Renderable* renderable;
+			core::component::Renderable* renderable;
 		};
 	}
 }

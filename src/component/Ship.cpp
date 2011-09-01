@@ -9,6 +9,7 @@
 #include "Ship.hpp"
 
 using namespace kocmoc::component;
+using namespace kocmoc::core::component;
 
 void Ship::init()
 {
