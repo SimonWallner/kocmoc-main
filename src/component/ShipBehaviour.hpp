@@ -11,7 +11,7 @@
 
 #include <kocmoc-core/componentSystem/Component.hpp>
 
-#include "ObjectBehaviour.hpp"
+#include <kocmoc-core/component/ObjectBehaviour.hpp>
 
 #include <iostream>
 

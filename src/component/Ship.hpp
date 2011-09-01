@@ -10,11 +10,12 @@
 #define KOCMOC_COMPONENT_SHIP_HPP
 
 #include <kocmoc-core/componentSystem/Object.hpp>
+#include <kocmoc-core/component/ObjectBehaviour.hpp>
+#include <kocmoc-core/component/Renderable.hpp>
 
-#include "ObjectBehaviour.hpp"
 #include "ShipBehaviour.hpp"
 #include "ShipController.hpp"
-#include "Renderable.hpp"
+
 
 namespace kocmoc
 {
