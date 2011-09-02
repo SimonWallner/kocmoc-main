@@ -29,8 +29,9 @@ using kocmoc::core::util::Properties;
 using kocmoc::core::renderer::Context;
 
 
-Kocmoc::Kocmoc(Properties* props)
-	: running(true)
+Kocmoc::Kocmoc(Properties* _props)
+	: props(_props)
+	, running(true)
 	, quit(symbolize("quit"))
 	, kw(this)
 {
@@ -88,7 +89,7 @@ void Kocmoc::printIntro()
 
 void Kocmoc::init()
 {
-	ship = new Ship("the player ship");
+	ship = new Ship("the player ship", props);
 	ship->init();
 }
 

@@ -25,7 +25,7 @@ namespace kocmoc
 		{
 		public:
 			
-			explicit Ship(std::string name) : Object(name) {}
+			explicit Ship(std::string name, core::util::Properties* props) : Object(name, props) {}
 			
 			void onMessage(void);
 			
