@@ -13,9 +13,14 @@
 
 #include <kocmoc-core/util/Properties.hpp>
 #include <kocmoc-core/util/util.hpp>
+
 #include <kocmoc-core/types/Symbol.hpp>
+
 #include <kocmoc-core/renderer/Context.hpp>
+#include <kocmoc-core/renderer/Shader.hpp>
+
 #include <kocmoc-core/input/InputManager.hpp>
+
 
 using namespace kocmoc;
 using namespace kocmoc::core::types;
@@ -27,6 +32,7 @@ using std::string;
 
 using kocmoc::core::util::Properties;
 using kocmoc::core::renderer::Context;
+using kocmoc::core::renderer::Shader;
 
 
 Kocmoc::Kocmoc(Properties* _props)
@@ -36,7 +42,7 @@ Kocmoc::Kocmoc(Properties* _props)
 	, kw(this)
 {
 	string configFile = props->getString(symbolize("config-file"));
-	core::util::parseConfigXMLFileIntoProperties(configFile, props);
+	core::util::parser::parseConfigXMLFileIntoProperties(configFile, props);
 	props->dumpCache();
 	
 	
@@ -89,6 +95,19 @@ void Kocmoc::printIntro()
 
 void Kocmoc::init()
 {
+	// try out a shader
+	Symbol mediaPath = symbolize("media-path");
+	string vert = props->getString(mediaPath) + "shaders/base.vert";
+	string frag = props->getString(mediaPath) + "shaders/base.frag";
+	
+	Shader shader(vert, frag);
+	shader.prepare();
+	if (shader.isPrepared())
+	{
+		std::cout << "shader is ready to roll" << std::endl;
+	}
+	
+	
 	ship = new Ship("the player ship", props);
 	ship->init();
 }
