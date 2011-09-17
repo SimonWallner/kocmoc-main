@@ -38,6 +38,7 @@ namespace kocmoc
 		 *			like command line arguments and so on
 		 */
 		Kocmoc(core::util::Properties* props);
+		~Kocmoc(void);
 		
 		/**
 		 * print the awesome ASCII art intro.

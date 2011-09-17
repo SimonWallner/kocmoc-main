@@ -64,6 +64,23 @@ Kocmoc::Kocmoc(Properties* _props)
 	
 	init();
 	
+	
+	
+	// try out a shader
+	Symbol mediaPath = symbolize("media-path");
+	string vert = props->getString(mediaPath) + "shaders/base.vert";
+	string frag = props->getString(mediaPath) + "shaders/base.frag";
+	
+	Shader shader(vert, frag);
+	shader.prepare();
+	if (shader.isPrepared())
+	{
+		std::cout << "shader is ready to roll" << std::endl;
+		shader.bind();
+	}
+	
+	
+	
 	FilmCamera* camera = new FilmCamera(vec3(-10, 0, 0), vec3(0, 0, 0), vec3(0, 0, 1));
 	
 	Timer* timer = new Timer();
@@ -107,20 +124,11 @@ void Kocmoc::printIntro()
 
 void Kocmoc::init()
 {
-	// try out a shader
-	Symbol mediaPath = symbolize("media-path");
-	string vert = props->getString(mediaPath) + "shaders/base.vert";
-	string frag = props->getString(mediaPath) + "shaders/base.frag";
-	
-	Shader shader(vert, frag);
-	shader.prepare();
-	if (shader.isPrepared())
-	{
-		std::cout << "shader is ready to roll" << std::endl;
-	}
-	
-	
 	ship = new Ship("the player ship", props);
 	ship->init();
 }
 
+Kocmoc::~Kocmoc()
+{
+	std::cout << "destroying kocmoc" << std::endl;
+}
