@@ -61,27 +61,13 @@ Kocmoc::Kocmoc(Properties* _props)
 	inputManager.registerButtonEventListener(quit, &kw);
 	inputManager.bindButtonEventToKey(quit, 81);	// q
 	inputManager.bindButtonEventToKey(quit, 256);	// ESC (not working ???)
-	
+
 	init();
 	
-	
-	
-	// try out a shader
-	Symbol mediaPath = symbolize("media-path");
-	string vert = props->getString(mediaPath) + "shaders/base.vert";
-	string frag = props->getString(mediaPath) + "shaders/base.frag";
-	
-	Shader shader(vert, frag);
-	shader.prepare();
-	if (shader.isPrepared())
-	{
-		std::cout << "shader is ready to roll" << std::endl;
-		shader.bind();
-	}
-	
-	
-	
-	FilmCamera* camera = new FilmCamera(vec3(-10, 0, 0), vec3(0, 0, 0), vec3(0, 0, 1));
+	FilmCamera* camera = new FilmCamera(vec3(-1000, 0, 0), vec3(0, 0, 0), vec3(0, 0, 1));
+	camera->setFocalLength(45.0f);
+	camera->setGateInPixel(720, 325);
+	camera->setFilterMarginInPixel(0, 0);
 	
 	Timer* timer = new Timer();
 	
@@ -89,6 +75,8 @@ Kocmoc::Kocmoc(Properties* _props)
 	{
 		timer->tick();
 		inputManager.poll();
+		
+		camera->updateMatrixes();
 		
 		ship->update(timer->getDeltaT());
 		ship->render(camera);

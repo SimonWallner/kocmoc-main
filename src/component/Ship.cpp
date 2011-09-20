@@ -24,8 +24,15 @@ void Ship::init()
 	
 	AssetLoader loader;
 	loader.addResourcePath(props->getString(symbolize("media-path")));
+	std::string test = props->getString(symbolize("test-model-name"));
+	std::string shaderPath = props->getString(symbolize("media-path")) + "shaders/base";
 	
-	renderable = loader.load(props->getString(symbolize("test-model-name")));
+	// FIXME: something mutates my stirngs in the props.
+	// changing it here to c_str() helped, but it is evil
+	// XXX:
+#warning XXX: problem with mutable strings in props!
+	renderable = loader.load(test.c_str(), shaderPath);
+	props->dumpCache();
 	
 	addComponent(objectBehaviour);
 	addComponent(shipBehaviour);
