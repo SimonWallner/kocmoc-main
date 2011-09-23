@@ -1,4 +1,4 @@
-//
+
 //  Kocmoc.cpp
 //  kocmoc
 //
@@ -25,10 +25,12 @@
 
 #include <kocmoc-core/time/Timer.hpp>
 
+#include <kocmoc-core/component/CameraController.hpp>
 
 using namespace kocmoc;
 using namespace kocmoc::core::types;
 using namespace kocmoc::core::input;
+using namespace kocmoc::core::component;
 using namespace kocmoc::component;
 
 using std::string;
@@ -38,6 +40,7 @@ using kocmoc::core::renderer::Context;
 using kocmoc::core::renderer::Shader;
 using kocmoc::core::scene::FilmCamera;
 using kocmoc::core::time::Timer;
+
 
 using glm::vec3;
 
@@ -65,22 +68,32 @@ Kocmoc::Kocmoc(Properties* _props)
 	init();
 	
 	FilmCamera* camera = new FilmCamera(vec3(-1000, 0, 0), vec3(0, 0, 0), vec3(0, 0, 1));
-	camera->setFocalLength(45.0f);
 	camera->setGateInPixel(720, 325);
 	camera->setFilterMarginInPixel(0, 0);
+	camera->setAngleOfView(1.5f);
+	
+	CameraController cameraController(camera, &inputManager);
+	inputManager.dumpBindings();
+	
 	
 	Timer* timer = new Timer();
 	
 	while (running == true && context.isAlive())
-	{
+	{	
+		// pre update
 		timer->tick();
 		inputManager.poll();
 		
+		// update
+		ship->update(timer->getDeltaT());
+		
+		// post update
 		camera->updateMatrixes();
 		
-		ship->update(timer->getDeltaT());
+		// render
 		ship->render(camera);
 		
+		// post render
 		context.swapBuffers();
 	}
 }
