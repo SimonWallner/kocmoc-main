@@ -22,6 +22,7 @@
 #include <kocmoc-core/input/InputManager.hpp>
 
 #include <kocmoc-core/scene/FilmCamera.hpp>
+#include <kocmoc-core/scene/OrthoCamera.hpp>
 
 #include <kocmoc-core/time/Timer.hpp>
 
@@ -39,6 +40,7 @@ using kocmoc::core::util::Properties;
 using kocmoc::core::renderer::Context;
 using kocmoc::core::renderer::Shader;
 using kocmoc::core::scene::FilmCamera;
+using kocmoc::core::scene::OrthoCamera;
 using kocmoc::core::time::Timer;
 
 
@@ -49,6 +51,7 @@ Kocmoc::Kocmoc(Properties* _props)
 	: props(_props)
 	, running(true)
 	, quit(symbolize("quit"))
+	, screenShot(symbolize("screen-shot"))
 	, kw(this)
 {
 	string configFile = props->getString(symbolize("config-file"));
@@ -62,18 +65,29 @@ Kocmoc::Kocmoc(Properties* _props)
 	InputManager inputManager(context.getWindowHandle());
 	
 	inputManager.registerButtonEventListener(quit, &kw);
-	inputManager.bindButtonEventToKey(quit, 81);	// q
+//	inputManager.bindButtonEventToKey(quit, 81);	// q
 	inputManager.bindButtonEventToKey(quit, 256);	// ESC (not working ???)
 
+	inputManager.registerButtonEventListener(screenShot, &kw);
+	inputManager.bindButtonEventToKey(screenShot, ',');
+
+	
 	init();
 	
-	FilmCamera* camera = new FilmCamera(vec3(-1000, 0, 0), vec3(0, 0, 0), vec3(0, 0, 1));
+	FilmCamera* camera = new FilmCamera(vec3(-1000, 0, 0), vec3(0, 0, 0), vec3(0, 1, 0));
 	camera->setGateInPixel(720, 325);
 	camera->setFilterMarginInPixel(0, 0);
 	camera->setAngleOfView(1.5f);
+//	OrthoCamera* ortho = new OrthoCamera(vec3(0), vec3(0, 0, -1), vec3(0, 1, 0));
 	
 	CameraController cameraController(camera, &inputManager);
 	inputManager.dumpBindings();
+	
+	
+	std::string texPath = props->getString(symbolize("media-path")) + "textures/uvGrid.png";
+	unsigned int texHandle = imageLoader.loadImage(texPath);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, texHandle);
 	
 	
 	Timer* timer = new Timer();
@@ -89,6 +103,7 @@ Kocmoc::Kocmoc(Properties* _props)
 		
 		// post update
 		camera->updateMatrixes();
+//		ortho->updateMatrixes();
 		
 		// render
 		ship->render(camera);

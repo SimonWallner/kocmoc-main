@@ -11,6 +11,7 @@
 
 #include <kocmoc-core/types/Symbol.hpp>
 #include <kocmoc-core/input/ButtonEventListener.hpp>
+#include <kocmoc-core/scene/ImageLoader.hpp>
 
 #include "component/Ship.hpp"
 
@@ -48,9 +49,10 @@ namespace kocmoc
 	private:
 		core::util::Properties* props;
 		bool running;
-		core::types::Symbol quit;
+		core::types::Symbol quit, screenShot;
 		
 		component::Ship* ship;
+		core::scene::ImageLoader imageLoader;
 		
 		class KeyWatcher : public core::input::ButtonEventListener
 		{
@@ -63,6 +65,8 @@ namespace kocmoc
 			{
 				if (name == p->quit && event.isPressed == true)
 					p->running = false;
+				else if (name == p->screenShot && event.isPressed == true)
+					p->imageLoader.screenShot();
 			}
 		private:
 			Kocmoc* p;
