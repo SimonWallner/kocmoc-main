@@ -17,4 +17,5 @@ void main(void)
 	float ambient = 0.4;
 	
 	gl_FragColor = vec4(0.2, 0.2, 0.2, 0.2) * max(diffuseFactor, ambient) * color;
+	gl_FragColor = vec4(normal, 0.5) * 0.5 + 0.5;
 }

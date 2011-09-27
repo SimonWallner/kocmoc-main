@@ -74,8 +74,8 @@ Kocmoc::Kocmoc(Properties* _props)
 	
 	init();
 	
-	FilmCamera* camera = new FilmCamera(vec3(-1000, 0, 0), vec3(0, 0, 0), vec3(0, 1, 0));
-	camera->setGateInPixel(720, 325);
+	FilmCamera* camera = new FilmCamera(vec3(0, 0, 10), vec3(0, 0, 0), vec3(0, 1, 0));
+	camera->setGateInPixel(720, 432);
 	camera->setFilterMarginInPixel(0, 0);
 	camera->setAngleOfView(1.5f);
 //	OrthoCamera* ortho = new OrthoCamera(vec3(0), vec3(0, 0, -1), vec3(0, 1, 0));
