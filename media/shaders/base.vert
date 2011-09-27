@@ -11,14 +11,15 @@ uniform mat4 modelMatrix;
 uniform mat4 viewMatrix;
 uniform mat4 projectionMatrix;
 
-varying vec3 outNormal;
-varying vec2 outUv;
-varying vec3 outTangent;
+varying vec3 normal;
+varying vec2 uv;
+varying vec3 tangent;
 
 void main(void)
 {
-	gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(inPosition, 1);
-	outNormal = inNormal;
-	outUv = inUv;
-	outTangent = inTangent;
+	// gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(inPosition, 1);
+	gl_Position = vec4(inPosition, 1);
+	normal = inNormal;
+	uv = inUv;
+	tangent = inTangent;
 }
