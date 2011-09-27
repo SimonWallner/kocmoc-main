@@ -94,12 +94,16 @@ Kocmoc::Kocmoc(Properties* _props)
 	
 	while (running == true && context.isAlive())
 	{	
+		float deltaT = timer->getDeltaT();
+		
 		// pre update
 		timer->tick();
+		cameraController.onUpdate(deltaT);
 		inputManager.poll();
 		
 		// update
-		ship->update(timer->getDeltaT());
+		ship->update(deltaT);
+		
 		
 		// post update
 		camera->updateMatrixes();
