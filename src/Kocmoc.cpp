@@ -65,20 +65,18 @@ Kocmoc::Kocmoc(Properties* _props)
 	InputManager inputManager(context.getWindowHandle());
 	
 	inputManager.registerButtonEventListener(quit, &kw);
-//	inputManager.bindButtonEventToKey(quit, 81);	// q
-	inputManager.bindButtonEventToKey(quit, 256);	// ESC (not working ???)
+	inputManager.bindKeyToButtonEvent(256, quit);	// ESC
 
 	inputManager.registerButtonEventListener(screenShot, &kw);
-	inputManager.bindButtonEventToKey(screenShot, ',');
+	inputManager.bindKeyToButtonEvent(',', screenShot);
 
 	
 	init();
 	
-	FilmCamera* camera = new FilmCamera(vec3(0, 0, 10), vec3(0, 0, 0), vec3(0, 1, 0));
+	FilmCamera* camera = new FilmCamera(vec3(0, 0, 4), vec3(0, 0, 0), vec3(0, 1, 0));
 	camera->setGateInPixel(720, 432);
 	camera->setFilterMarginInPixel(0, 0);
 	camera->setAngleOfView(1.5f);
-//	OrthoCamera* ortho = new OrthoCamera(vec3(0), vec3(0, 0, -1), vec3(0, 1, 0));
 	
 	CameraController cameraController(camera, &inputManager);
 	inputManager.dumpBindings();
@@ -107,7 +105,6 @@ Kocmoc::Kocmoc(Properties* _props)
 		
 		// post update
 		camera->updateMatrixes();
-//		ortho->updateMatrixes();
 		
 		// render
 		ship->render(camera);
