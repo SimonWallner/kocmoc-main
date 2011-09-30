@@ -20,6 +20,7 @@ int main(int argc, char *argv[])
 
 	// command line arguments, defaults
 	std::string configFile = "kocmoc-config.xml";
+	std::string coreConfigFile = "kocmoc-core-config.xml";
 
 	// parse command line args
 	try
@@ -28,7 +29,10 @@ int main(int argc, char *argv[])
 		options.add_options()
 			("version,v", "print version string")
 			("help,h", "produce help message")
-			("config-file,c", po::value(&configFile), "xml config file to parse");
+			("config-file,c", po::value(&configFile), "xml config file to parse")
+			("core-config-file,k", po::value(&coreConfigFile), "kocmoc-core config file to parse")
+		;
+		
 		
 		po::variables_map vars;        
 		po::store(po::parse_command_line(argc, argv, options), vars);
@@ -54,6 +58,7 @@ int main(int argc, char *argv[])
 		{
 			core::util::Properties props;
 			props.add(core::types::symbolize("config-file"), configFile);
+			props.add(core::types::symbolize("core-config-file"), coreConfigFile);
 			
 			Kocmoc kocmoc(&props);
 		}

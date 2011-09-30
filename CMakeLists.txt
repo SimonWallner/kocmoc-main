@@ -54,6 +54,8 @@ set(KOCMOC_MEDIA_PATH ${PROJECT_SOURCE_DIR}/media/)
 configure_file(media/kocmoc-config.xml.in ${EXECUTABLE_OUTPUT_PATH}/kocmoc-config.xml)
 configure_file(media/properties.dtd ${EXECUTABLE_OUTPUT_PATH}/properties.dtd COPYONLY)
 
+# config core
+set(KOCMOC_CORE_CONFIG_TARGET_LOCATION ${EXECUTABLE_OUTPUT_PATH}/kocmoc-core-config.xml)
 
 # -- add subdirs -------------------------------------------------------------
 add_subdirectory(external/kocmoc-core)

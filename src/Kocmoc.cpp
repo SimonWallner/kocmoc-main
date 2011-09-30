@@ -55,7 +55,9 @@ Kocmoc::Kocmoc(Properties* _props)
 	, kw(this)
 {
 	string configFile = props->getString(symbolize("config-file"));
+	string coreConfigFile = props->getString(symbolize("core-config-file"));
 	core::util::parser::parseConfigXMLFileIntoProperties(configFile, props);
+	core::util::parser::parseConfigXMLFileIntoProperties(coreConfigFile, props);
 	props->dumpCache();
 	
 	
@@ -79,14 +81,7 @@ Kocmoc::Kocmoc(Properties* _props)
 	camera->setAngleOfView(1.5f);
 	
 	CameraController cameraController(camera, &inputManager);
-	inputManager.dumpBindings();
-	
-	
-	std::string texPath = props->getString(symbolize("media-path")) + "textures/uvGrid.png";
-	unsigned int texHandle = imageLoader.loadImage(texPath);
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, texHandle);
-	
+	inputManager.dumpBindings();	
 	
 	Timer* timer = new Timer();
 	
